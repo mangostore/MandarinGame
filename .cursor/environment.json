@@ -1,0 +1,19 @@
+{
+  "$schema": "https://cursor.com/schemas/environment.json",
+  "build": {
+    "dockerfile": ".cursor/Dockerfile",
+    "context": "."
+  },
+  "install": "pnpm install --frozen-lockfile || pnpm install",
+  "start": "bash .cursor/start.sh",
+  "terminals": [
+    {
+      "name": "api (NestJS)",
+      "command": "pnpm --filter @mandaringame/api start:dev"
+    },
+    {
+      "name": "web (Vue3)",
+      "command": "pnpm --filter @mandaringame/web dev"
+    }
+  ]
+}

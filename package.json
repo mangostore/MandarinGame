@@ -1,0 +1,20 @@
+{
+  "name": "mandarin-game",
+  "version": "0.1.0",
+  "private": true,
+  "description": "普通话发音学习游戏（赛道A 母语纠音 MVP）— Vue3 + NestJS + Prisma 单仓库",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "web": "pnpm --filter @mandaringame/web dev",
+    "api": "pnpm --filter @mandaringame/api start:dev",
+    "lint": "pnpm -r lint",
+    "prisma:generate": "pnpm --filter @mandaringame/api prisma:generate",
+    "prisma:migrate": "pnpm --filter @mandaringame/api prisma:migrate",
+    "db:seed": "pnpm --filter @mandaringame/api db:seed"
+  }
+}
