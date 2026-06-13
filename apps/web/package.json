@@ -1,0 +1,33 @@
+{
+  "name": "@mandarin-game/web",
+  "version": "1.0.0",
+  "description": "MandarinGame Web - Vue3 Frontend",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint src --ext .vue,.ts"
+  },
+  "dependencies": {
+    "@vueuse/core": "^11.1.0",
+    "axios": "^1.7.7",
+    "canvas-confetti": "^1.9.3",
+    "naive-ui": "^2.39.0",
+    "pinia": "^2.2.2",
+    "vue": "^3.5.7",
+    "vue-router": "^4.4.3",
+    "vfonts": "^0.0.3"
+  },
+  "devDependencies": {
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^22.7.4",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.5.4",
+    "vite": "^5.4.8",
+    "vue-tsc": "^2.1.6"
+  }
+}
