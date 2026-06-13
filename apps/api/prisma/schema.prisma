@@ -1,0 +1,113 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String    @unique
+  email         String    @unique
+  password      String
+  streakDays    Int       @default(0)
+  lastLoginDate DateTime?
+  totalScore    Int       @default(0)
+  level         Int       @default(1)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions     GameSession[]
+  progress     Progress?
+  errorBook    ErrorBook[]
+  achievements UserAchievement[]
+}
+
+model Question {
+  id             Int          @id @default(autoincrement())
+  type           QuestionType
+  text           String
+  pinyin         String
+  audio          String?
+  difficulty     Int          @default(1)
+  confusableWith Json         @default("[]")
+  category       String
+  hint           String?
+  createdAt      DateTime     @default(now())
+
+  sessions  GameSession[]
+  errorBook ErrorBook[]
+}
+
+enum QuestionType {
+  TONE
+  INITIAL
+  FINAL
+  MIXED
+}
+
+model GameSession {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  questionId   Int
+  userAnswer   String
+  isCorrect    Boolean
+  score        Int      @default(0)
+  responseTime Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  question Question @relation(fields: [questionId], references: [id])
+}
+
+model Progress {
+  id                Int      @id @default(autoincrement())
+  userId            Int      @unique
+  currentLevel      Int      @default(1)
+  currentDifficulty Int      @default(1)
+  totalCorrect      Int      @default(0)
+  totalAttempts     Int      @default(0)
+  accuracy          Float    @default(0)
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model ErrorBook {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  questionId   Int
+  errorCount   Int      @default(1)
+  lastErrorAt  DateTime @default(now())
+  nextReviewAt DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id])
+  question Question @relation(fields: [questionId], references: [id])
+
+  @@unique([userId, questionId])
+}
+
+model Achievement {
+  id          Int    @id @default(autoincrement())
+  name        String @unique
+  description String
+  icon        String
+  conditionType String
+  conditionValue Int
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  achievementId Int
+  unlockedAt    DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id])
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@unique([userId, achievementId])
+}

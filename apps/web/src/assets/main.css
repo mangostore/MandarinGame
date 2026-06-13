@@ -1,0 +1,90 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-700 font-semibold py-3 px-6 rounded-xl border-2 border-gray-200 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-md p-6;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-amber-400 focus:outline-none transition-colors duration-200;
+  }
+}
+
+/* 录音脉冲动画 */
+@keyframes recording-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
+}
+
+.recording-active {
+  animation: recording-pulse 1.5s ease-in-out infinite;
+}
+
+/* 答对绿色闪烁 */
+@keyframes correct-flash {
+  0% { background-color: rgb(255,255,255); }
+  30% { background-color: rgb(187, 247, 208); }
+  100% { background-color: rgb(255,255,255); }
+}
+
+.correct-flash {
+  animation: correct-flash 0.6s ease-out;
+}
+
+/* 答错红色抖动 */
+@keyframes wrong-shake {
+  0%, 100% { transform: translateX(0); background-color: rgb(255,255,255); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); background-color: rgb(254, 226, 226); }
+  20%, 40%, 60%, 80% { transform: translateX(6px); background-color: rgb(254, 226, 226); }
+}
+
+.wrong-shake {
+  animation: wrong-shake 0.6s ease-in-out;
+}
+
+/* 星星动画 */
+@keyframes star-burst {
+  0% { transform: scale(0) rotate(0); opacity: 1; }
+  80% { transform: scale(1.2) rotate(15deg); opacity: 0.8; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+
+.star-burst {
+  animation: star-burst 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 成就徽章动画 */
+@keyframes achievement-pop {
+  0% { transform: translateY(100px); opacity: 0; }
+  70% { transform: translateY(-10px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+.achievement-pop {
+  animation: achievement-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 渐变背景 */
+.gradient-bg {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+}
+
+.gradient-bg-cool {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 50%, #93c5fd 100%);
+}
